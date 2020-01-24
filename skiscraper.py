@@ -15,6 +15,10 @@ def jackfrost():
       strippedslopes = slopes.strip()
       print(strippedslopes)
 
+def bearcreek():
+  r = requests.get("https://www.bcmountainresort.com/play/snowsports/pa-ski-area-snowtubing-conditions/")
+  soup = BeautifulSoup(r.text, 'html.parser')
+
 print('Ski Scraper Party Time')
 jackfrost()
 print('Done')
