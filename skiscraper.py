@@ -10,15 +10,37 @@ def jackfrost():
 
   for new in result:
     if 'Trails' in new.text and len(new.text) < 250:
-      print('Found something', len(new.text))
+      #print('Found something', len(new.text))
       slopes = new.div.contents[1].div.next_sibling.next_sibling.div.string
       strippedslopes = slopes.strip()
-      print(strippedslopes)
+      print(strippedslopes, 'Trails')
 
 def bearcreek():
   r = requests.get("https://www.bcmountainresort.com/play/snowsports/pa-ski-area-snowtubing-conditions/")
   soup = BeautifulSoup(r.text, 'html.parser')
+  # Finding the "Open Trails" tag has been cumbersome so instead just yank every <dt> and filter
+  dttags = soup.body.find_all('dt')
+  for check in dttags:
+    if check.text.strip() == "Open Trails":
+      #print(check.text, check.next_sibling.string) <-- Removing if statement will show more detailed report
+      print(check.next_sibling.string)
 
-print('Ski Scraper Party Time')
+def camelback():
+  r = requests.get("https://www.skicamelback.com/plan-your-trip/snow-report/")
+  soup = BeautifulSoup(r.text, 'html.parser')
+  dttags = soup.body.find_all('dt')
+  for check in dttags:
+    if check.text.strip() == "Open Trails":
+      #print(check.text, check.next_sibling.string) <-- Removing if statement will show more detailed report
+      print(check.next_sibling.string)
+  
+
+print('Lowrie Ski Scraper')
+print('----\n', 'Jack Frost:')
 jackfrost()
-print('Done')
+print('----\n', 'Bear Creek:')
+bearcreek()
+print('----\n', 'Camelback:')
+camelback();
+
+print('\n\n', 'Happy skiing!')
