@@ -13,7 +13,7 @@ def jackfrost():
       #print('Found something', len(new.text))
       slopes = new.div.contents[1].div.next_sibling.next_sibling.div.string
       strippedslopes = slopes.strip()
-      print(strippedslopes, 'Trails')
+      print(strippedslopes, 'Trails of 20')
 
 def bearcreek():
   r = requests.get("https://www.bcmountainresort.com/play/snowsports/pa-ski-area-snowtubing-conditions/")
@@ -23,7 +23,7 @@ def bearcreek():
   for check in dttags:
     if check.text.strip() == "Open Trails":
       #print(check.text, check.next_sibling.string) <-- Removing if statement will show more detailed report
-      print(check.next_sibling.string)
+      print(check.next_sibling.string, 'of 22')
 
 def camelback():
   r = requests.get("https://www.skicamelback.com/plan-your-trip/snow-report/")
@@ -32,7 +32,7 @@ def camelback():
   for check in dttags:
     if check.text.strip() == "Open Trails":
       #print(check.text, check.next_sibling.string) <-- Removing if statement will show more detailed report
-      print(check.next_sibling.string)
+      print(check.next_sibling.string, 'of 37')
   
 
 print('Lowrie Ski Scraper')
