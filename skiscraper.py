@@ -33,6 +33,12 @@ def camelback():
     if check.text.strip() == "Open Trails":
       #print(check.text, check.next_sibling.string) <-- Removing if statement will show more detailed report
       print(check.next_sibling.string, 'of 37')
+
+def bluemountain():
+  r = requests.get("https://www.skibluemt.com/blue-current/")
+  soup = BeautifulSoup(r.text, "html.parser")
+  spantags = soup.find_all('span', attrs = {'class':'open'})
+  print(spantags[0].string, 'Trails of 40')
   
 
 print('Lowrie Ski Scraper')
@@ -41,6 +47,8 @@ jackfrost()
 print('----\n', 'Bear Creek:')
 bearcreek()
 print('----\n', 'Camelback:')
-camelback();
+camelback()
+print('----\n', 'Blue Mountain:')
+bluemountain()
 
 print('\n\n', 'Happy skiing!')
