@@ -14,6 +14,13 @@ def jackfrost():
       slopes = new.div.contents[1].div.next_sibling.next_sibling.div.string
       strippedslopes = slopes.strip()
       print(strippedslopes, 'Trails of 20')
+    if 'Lifts' in new.text and len(new.text) < 250:
+      lifts = new.div.contents[1].div.next_sibling.next_sibling.div.string
+      strippedlifts = lifts.strip()
+      print(strippedlifts, 'Lifts of 9')
+
+def bigboulder():
+  print('No statistics available currently')
 
 def bearcreek():
   r = requests.get("https://www.bcmountainresort.com/play/snowsports/pa-ski-area-snowtubing-conditions/")
@@ -21,9 +28,12 @@ def bearcreek():
   # Finding the "Open Trails" tag has been cumbersome so instead just yank every <dt> and filter
   dttags = soup.body.find_all('dt')
   for check in dttags:
-    if check.text.strip() == "Open Trails":
+    tag = check.text.strip()
+    if tag == "Open Trails":
       #print(check.text, check.next_sibling.string) <-- Removing if statement will show more detailed report
-      print(check.next_sibling.string, 'of 22')
+      print(check.next_sibling.string, 'of 23 open')
+    if tag == "Open Lifts":
+      print(check.next_sibling.string, 'of 6 open (including snowtubing and beginner carpet)')
 
 def camelback():
   r = requests.get("https://www.skicamelback.com/plan-your-trip/snow-report/")
@@ -44,6 +54,8 @@ def bluemountain():
 print('Lowrie Ski Scraper')
 print('----\n', 'Jack Frost:')
 jackfrost()
+print('----\n', 'Big Boulder:' )
+bigboulder()
 print('----\n', 'Bear Creek:')
 bearcreek()
 print('----\n', 'Camelback:')
